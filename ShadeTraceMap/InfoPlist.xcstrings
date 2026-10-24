@@ -1,0 +1,137 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "CFBundleDisplayName" : {
+      "comment" : "Bundle display name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "ShadeTrace Map"
+          }
+        }
+      }
+    },
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "ShadeTraceMap"
+          }
+        }
+      }
+    },
+    "NSLocationWhenInUseUsageDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يستخدم ShadeTrace Map موقعك لتوسيط الخريطة على مكان وجودك."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShadeTrace Map bruger din placering til at centrere kortet, hvor du er."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShadeTrace Map verwendet Ihren Standort, um die Karte auf Ihre Position zu zentrieren."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShadeTrace Map uses your location to center the map on where you are."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShadeTrace Map usa tu ubicación para centrar el mapa donde estás."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShadeTrace Map utilise votre position pour centrer la carte sur l'endroit où vous vous trouvez."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShadeTrace Map menggunakan lokasi Anda untuk memusatkan peta pada posisi Anda."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShadeTrace Mapは、地図を現在地の中心に表示するために位置情報を使用します。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShadeTrace Map은 현재 위치를 지도 중앙에 표시하기 위해 위치 정보를 사용합니다."
+          }
+        },
+        "la" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShadeTrace Map loco tuo utitur ut tabulam ad locum tuum centret."
+          }
+        },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShadeTrace Map menggunakan lokasi anda untuk memusatkan peta pada kedudukan anda."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O ShadeTrace Map usa sua localização para centralizar o mapa onde você está."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShadeTrace Map использует ваше местоположение, чтобы центрировать карту на том месте, где вы находитесь."
+          }
+        },
+        "ss" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I-ShadeTrace Map isebentisa indzawo yakho kute imephu ibe semkhatsini wendzawo lokuyo."
+          }
+        },
+        "yue-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShadeTrace Map 會用你嘅位置，將地圖對準你而家喺嘅地方。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShadeTrace Map 会使用你的位置，将地图居中于你所在之处。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShadeTrace Map 會使用你的位置，將地圖置中於你所在之處。"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
