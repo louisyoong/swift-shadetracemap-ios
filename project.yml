@@ -15,7 +15,7 @@ settings:
     CODE_SIGN_STYLE: Automatic
     SWIFT_VERSION: "5.0"
     MARKETING_VERSION: "3.0.0"
-    CURRENT_PROJECT_VERSION: "4"
+    CURRENT_PROJECT_VERSION: "5"
 targets:
   ShadeTraceMap:
     type: application
@@ -25,6 +25,19 @@ targets:
     dependencies:
       - package: MapLibre
       - target: SunsetWidget
+    postBuildScripts:
+      # MapLibre ships prebuilt without a dSYM, so App Store uploads warn
+      # "Upload Symbols Failed". Generate one from the embedded binary (same
+      # UUID) so the archive's dSYMs folder is complete.
+      - name: Generate MapLibre dSYM
+        basedOnDependencyAnalysis: false
+        inputFiles:
+          - $(TARGET_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MapLibre.framework/MapLibre
+        outputFiles:
+          - $(DWARF_DSYM_FOLDER_PATH)/MapLibre.framework.dSYM
+        script: |
+          [ "$CONFIGURATION" = "Release" ] || exit 0
+          xcrun dsymutil "$SCRIPT_INPUT_FILE_0" -o "$SCRIPT_OUTPUT_FILE_0" 2>&1 | grep -v "no debug symbols" || true
     entitlements:
       path: ShadeTraceMap/ShadeTraceMap.entitlements
       properties:

@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreLocation
+import Combine
 
 /// Device heading from Core Location (what flutter_compass wraps).
 @MainActor

@@ -248,6 +248,7 @@
 				AFC3162E9D0DA44BA3B03245 /* Resources */,
 				C74D12D426CE3E89B20768A8 /* Frameworks */,
 				87DB21279F135DCFEB6EA95B /* Embed Foundation Extensions */,
+				709ABABA04F27B205284BA7F /* Generate MapLibre dSYM */,
 			);
 			buildRules = (
 			);
@@ -342,6 +343,30 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		709ABABA04F27B205284BA7F /* Generate MapLibre dSYM */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(TARGET_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MapLibre.framework/MapLibre",
+			);
+			name = "Generate MapLibre dSYM";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DWARF_DSYM_FOLDER_PATH)/MapLibre.framework.dSYM",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "[ \"$CONFIGURATION\" = \"Release\" ] || exit 0\nxcrun dsymutil \"$SCRIPT_INPUT_FILE_0\" -o \"$SCRIPT_OUTPUT_FILE_0\" 2>&1 | grep -v \"no debug symbols\" || true\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7AB33F91148776D437140510 /* Sources */ = {
@@ -444,7 +469,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = M9VG7M352C;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -511,7 +536,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = M9VG7M352C;
 				ENABLE_NS_ASSERTIONS = NO;

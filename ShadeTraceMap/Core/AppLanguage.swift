@@ -1,8 +1,9 @@
 import SwiftUI
 import Observation
 
-/// The app's display language, chosen in Settings. `nil` follows the
-/// device (or the per-app language picked in the iOS Settings app).
+/// The app's display language, chosen in Settings. Starts in English until
+/// the user picks something; `nil` ("System") follows the device (or the
+/// per-app language picked in the iOS Settings app).
 ///
 /// Switches live: SwiftUI `Text` resolves translations through the
 /// `\.locale` environment, and every `String(localized:)` in the app passes
@@ -35,13 +36,21 @@ final class AppLanguage {
 
     private static let storageKey = "app_language"
     private static let deviceLanguagesKey = "device_languages"
+    /// Stored for an explicit "System" choice, so it isn't mistaken for
+    /// "never chosen" (which means English).
+    private static let systemValue = "system"
 
     /// nil = follow the device.
     private(set) var code: String?
 
     private init() {
-        code = UserDefaults.standard.string(forKey: Self.storageKey)
-        if code == nil {
+        let stored = UserDefaults.standard.string(forKey: Self.storageKey)
+        switch stored {
+        case nil: code = "en"
+        case Self.systemValue: code = nil
+        default: code = stored
+        }
+        if stored == nil || stored == Self.systemValue {
             // Only trustworthy when no in-app choice is active: while one is,
             // iOS reports the chosen language for the whole session.
             UserDefaults.standard.set(Locale.preferredLanguages, forKey: Self.deviceLanguagesKey)
@@ -59,7 +68,7 @@ final class AppLanguage {
             // language picker, so system UI follows on the next launch too.
             defaults.set([newCode], forKey: "AppleLanguages")
         } else {
-            defaults.removeObject(forKey: Self.storageKey)
+            defaults.set(Self.systemValue, forKey: Self.storageKey)
             defaults.removeObject(forKey: "AppleLanguages")
         }
         Self.cache(newCode)
