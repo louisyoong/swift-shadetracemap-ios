@@ -94,7 +94,8 @@ struct ShadeMapScreen: View {
     }
 
     private var searchField: some View {
-        LocationSearchField(controller: model.search, onSelect: model.select)
+        LocationSearchField(controller: model.search, onSelect: model.select,
+                            current: Place(displayName: model.locationLabel, lat: model.coord.latitude, lon: model.coord.longitude))
     }
 
     private var legend: some View {

@@ -28,7 +28,8 @@ struct WeatherScreen: View {
         }
         .overlay {
             VStack(spacing: 0) {
-                LocationSearchField(controller: search, onSelect: select, hint: "Check weather for any place worldwide…")
+                LocationSearchField(controller: search, onSelect: select, hint: "Check weather for any place worldwide…",
+                                    current: Place(displayName: locationLabel, lat: lat, lon: lng))
                     .padding(EdgeInsets(top: 12, leading: 12, bottom: 4, trailing: 12))
                     .zIndex(1)
                 content(isDark)

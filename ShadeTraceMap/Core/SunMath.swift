@@ -86,6 +86,35 @@ func findSunriseSunset(dayStartMs: Int, lat: Double, lon: Double) -> SunTimes {
     return SunTimes(sunrise: sunrise, sunset: sunset)
 }
 
+/// Golden hour: the sun between 6° above and 4° below the horizon, when the
+/// light is warm and soft. Minutes after [dayStartMs] (local midnight), like
+/// [SunTimes]; nil where the sun never crosses that band (polar days).
+struct GoldenHours: Equatable {
+    var morningStart: Int?
+    var morningEnd: Int?
+    var eveningStart: Int?
+    var eveningEnd: Int?
+}
+
+let goldenHourHighDeg = 6.0
+let goldenHourLowDeg = -4.0
+
+func findGoldenHours(dayStartMs: Int, lat: Double, lon: Double) -> GoldenHours {
+    var result = GoldenHours()
+    var last: Double?
+    for m in stride(from: 0, through: 1440, by: 2) {
+        let alt = sunPosition(instantMs: Double(dayStartMs + m * 60_000), lat: lat, lon: lon).altitude
+        if let last {
+            if last <= goldenHourLowDeg && alt > goldenHourLowDeg && result.morningStart == nil { result.morningStart = m }
+            if last <= goldenHourHighDeg && alt > goldenHourHighDeg && result.morningEnd == nil { result.morningEnd = m }
+            if last > goldenHourHighDeg && alt <= goldenHourHighDeg && result.eveningStart == nil { result.eveningStart = m }
+            if last > goldenHourLowDeg && alt <= goldenHourLowDeg && result.eveningEnd == nil { result.eveningEnd = m }
+        }
+        last = alt
+    }
+    return result
+}
+
 // MARK: - Geo helpers
 
 private let earthR = 6_378_137.0

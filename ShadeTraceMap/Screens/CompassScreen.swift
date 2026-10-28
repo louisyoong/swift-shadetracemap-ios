@@ -72,6 +72,7 @@ final class HeadingProvider: NSObject, CLLocationManagerDelegate {
 struct CompassScreen: View {
     @Environment(\.windowSize) private var windowSize
     @Environment(\.colorScheme) private var scheme
+    @Environment(SavedPlaces.self) private var saved
 
     @State private var lat = 3.1412
     @State private var lng = 101.68653
@@ -148,10 +149,36 @@ struct CompassScreen: View {
         }
     }
 
+    /// With saved places, the chip is also a menu to switch between them
+    /// (this tab has no search field).
+    @ViewBuilder
     private func chip(_ isDark: Bool) -> some View {
-        LocationChip(label: locationLabel, textColor: textColor(isDark), isDark: isDark)
-            .padding(.horizontal, 12)
-            .padding(.top, 12)
+        let label = LocationChip(label: locationLabel, textColor: textColor(isDark), isDark: isDark,
+                                 showsMenu: !saved.places.isEmpty)
+        Group {
+            if saved.places.isEmpty {
+                label
+            } else {
+                Menu {
+                    Button { detectDeviceLocation() } label: {
+                        Label("My Location", systemImage: "location.fill")
+                    }
+                    Section("Saved Places") {
+                        ForEach(saved.places) { place in
+                            Button {
+                                lat = place.lat
+                                lng = place.lon
+                                locationLabel = place.name
+                                updateFacingEffects()
+                            } label: { Label(place.name, systemImage: "star.fill") }
+                        }
+                    }
+                } label: { label }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(.horizontal, 12)
+        .padding(.top, 12)
     }
 
     /// `pinnedTop` sits the dial just under the location chip instead of

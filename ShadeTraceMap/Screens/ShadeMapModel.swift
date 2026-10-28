@@ -32,6 +32,8 @@ final class ShadeMapModel {
     private(set) var statusMsg = String(localized: "Loading map…", bundle: AppLanguage.bundle)
     private(set) var statusError = false
     private(set) var locationLabel = String(localized: "Kuala Lumpur, Malaysia", bundle: AppLanguage.bundle)
+    /// The place `locationLabel` names (not the map center, which the user pans).
+    private(set) var coord = centerKL
 
     private(set) var ambientColor = Color(hex: 0xFF3A4A73)
     private(set) var ambientOpacity = 0.0
@@ -324,6 +326,7 @@ final class ShadeMapModel {
         dateStr = dateString(from: f)
         minutes = f.minutesOfDay
         locationLabel = label
+        self.coord = coord
         search.selected(label)
         onWallClockChanged()
     }

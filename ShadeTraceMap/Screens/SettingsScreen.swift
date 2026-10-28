@@ -8,6 +8,8 @@ private let linkedInURL = URL(string: "https://www.linkedin.com/in/louis-yoong-a
 struct SettingsScreen: View {
     @Environment(\.colorScheme) private var scheme
     @Environment(AppLanguage.self) private var language
+    @Environment(SavedPlaces.self) private var saved
+    @Environment(GoldenHourReminders.self) private var reminders
     @Binding var themeMode: ThemeMode
 
     var body: some View {
@@ -51,6 +53,14 @@ struct SettingsScreen: View {
 
                     SectionLabel("LANGUAGE", color: label).padding(.leading, 4).padding(.bottom, 8).padding(.top, 28)
                     languagePicker(isDark)
+                        .glass(radius: kCardRadius, tint: panelTint, opacity: 0.55)
+
+                    SectionLabel("GOLDEN HOUR REMINDERS", color: label).padding(.leading, 4).padding(.bottom, 8).padding(.top, 28)
+                    remindersCard(isDark, divider: divider)
+                        .glass(radius: kCardRadius, tint: panelTint, opacity: 0.55)
+
+                    SectionLabel("SAVED PLACES", color: label).padding(.leading, 4).padding(.bottom, 8).padding(.top, 28)
+                    savedPlacesCard(isDark, divider: divider)
                         .glass(radius: kCardRadius, tint: panelTint, opacity: 0.55)
 
                     SectionLabel("ABOUT", color: label).padding(.leading, 4).padding(.bottom, 8).padding(.top, 28)
@@ -109,6 +119,115 @@ struct SettingsScreen: View {
         }
         .buttonStyle(.plain)
         .padding(.vertical, 4)
+    }
+
+    private func remindersCard(_ isDark: Bool, divider: some View) -> some View {
+        VStack(spacing: 0) {
+            row("bell", "Golden hour reminders", isDark) {
+                Toggle("", isOn: Binding(get: { reminders.enabled },
+                                         set: { on in Task { await reminders.setEnabled(on) } }))
+                    .labelsHidden()
+                    .tint(accentForTheme(accent, isDark))
+            }
+            if reminders.permissionDenied {
+                Button {
+                    if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
+                } label: {
+                    Text("Notifications are off for ShadeTrace Map. Tap to turn them on in Settings.")
+                        .font(.system(size: 12))
+                        .foregroundStyle(accentForTheme(accent, isDark))
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(EdgeInsets(top: 0, leading: 54, bottom: 12, trailing: 12))
+                }
+                .buttonStyle(.plain)
+            }
+            if reminders.enabled {
+                divider
+                menuRow("clock", "Remind me", isDark, value: Text("\(reminders.leadMinutes) min before")) {
+                    ForEach(GoldenHourReminders.leadOptions, id: \.self) { minutes in
+                        checkButton(reminders.leadMinutes == minutes, Text("\(minutes) min before")) {
+                            reminders.leadMinutes = minutes
+                        }
+                    }
+                }
+                divider
+                let place = reminders.placeId.flatMap { saved.place(id: $0) }
+                menuRow("mappin.and.ellipse", "Place", isDark,
+                        value: place.map { Text(verbatim: $0.name) } ?? Text("My Location")) {
+                    checkButton(place == nil, Text("My Location")) { reminders.placeId = nil }
+                    if !saved.places.isEmpty {
+                        Divider()
+                        ForEach(saved.places) { p in
+                            checkButton(place?.id == p.id, Text(verbatim: p.name)) { reminders.placeId = p.id }
+                        }
+                    }
+                }
+                divider
+                row("sunrise", "Morning golden hour too", isDark) {
+                    Toggle("", isOn: Binding(get: { reminders.includeMorning }, set: { reminders.includeMorning = $0 }))
+                        .labelsHidden()
+                        .tint(accentForTheme(accent, isDark))
+                }
+            }
+        }
+        .padding(.vertical, 4)
+    }
+
+    @ViewBuilder
+    private func savedPlacesCard(_ isDark: Bool, divider: some View) -> some View {
+        if saved.places.isEmpty {
+            Text("Tap the ☆ in any search bar to save a place.")
+                .font(.system(size: 13))
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(16)
+        } else {
+            VStack(spacing: 0) {
+                ForEach(Array(saved.places.enumerated()), id: \.element.id) { index, place in
+                    if index > 0 { divider }
+                    HStack(spacing: 12) {
+                        badge("star.fill", isDark)
+                        Text(verbatim: place.name).font(.system(size: 14)).lineLimit(1)
+                        Spacer()
+                        Button { saved.remove(place) } label: {
+                            Image(systemName: "trash")
+                                .font(.system(size: 14))
+                                .foregroundStyle(.secondary)
+                                .frame(width: 32, height: 32)
+                                .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel(Text("Remove from saved places"))
+                    }
+                    .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 8))
+                }
+            }
+            .padding(.vertical, 4)
+        }
+    }
+
+    private func menuRow<Items: View>(_ icon: String, _ text: LocalizedStringKey, _ isDark: Bool, value: Text,
+                                      @ViewBuilder items: () -> Items) -> some View {
+        Menu {
+            items()
+        } label: {
+            row(icon, text, isDark) {
+                HStack(spacing: 4) {
+                    value.lineLimit(1)
+                    Image(systemName: "chevron.up.chevron.down").font(.system(size: 11, weight: .semibold))
+                }
+                .font(.system(size: 14))
+                .foregroundStyle(accentForTheme(accent, isDark))
+            }
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func checkButton(_ checked: Bool, _ title: Text, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            if checked { Label { title } icon: { Image(systemName: "checkmark") } } else { title }
+        }
     }
 
     private func badge(_ icon: String, _ isDark: Bool, size: CGFloat = 30) -> some View {

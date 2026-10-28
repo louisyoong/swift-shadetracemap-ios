@@ -23,6 +23,7 @@ struct SunPathScreen: View {
     @State private var search = LocationSearchController()
     @State private var dayAltitudes: [Double] = []
     @State private var sunTimes = SunTimes()
+    @State private var goldenHours = GoldenHours()
     @State private var lastPathKey = ""
     @State private var showDatePicker = false
     /// Where the fold crosses this screen (reserved-region API), if anywhere.
@@ -86,7 +87,8 @@ struct SunPathScreen: View {
     // MARK: - Pieces
 
     private var searchBar: some View {
-        LocationSearchField(controller: search, onSelect: select, hint: "Simulate any place worldwide…")
+        LocationSearchField(controller: search, onSelect: select, hint: "Simulate any place worldwide…",
+                            current: Place(displayName: locationLabel, lat: lat, lon: lng))
             .padding(EdgeInsets(top: 12, leading: 12, bottom: 8, trailing: 12))
             .zIndex(1)
     }
@@ -164,7 +166,9 @@ struct SunPathScreen: View {
                          textColor: onPanel, textMuted: muted, accent: 0xFFFFB74D)
                 StatTile(icon: "moon.stars", label: "SUNSET", value: formatHHmm(sunTimes.sunset),
                          textColor: onPanel, textMuted: muted, accent: 0xFF8B93FF)
-                Color.clear.frame(maxWidth: .infinity)
+                // Evening golden hour start: the one photographers plan around.
+                StatTile(icon: "camera.aperture", label: "GOLDEN HOUR", value: formatHHmm(goldenHours.eveningStart),
+                         textColor: onPanel, textMuted: muted, accent: 0xFFFFB300)
             }
             .padding(.top, 14)
         }
@@ -243,6 +247,7 @@ struct SunPathScreen: View {
             sunPosition(instantMs: Double(dayStart + $0 * 60_000), lat: lat, lon: lng).altitude
         }
         sunTimes = findSunriseSunset(dayStartMs: dayStart, lat: lat, lon: lng)
+        goldenHours = findGoldenHours(dayStartMs: dayStart, lat: lat, lon: lng)
     }
 
     private func setLocation(lat: Double, lng: Double, label: String) {

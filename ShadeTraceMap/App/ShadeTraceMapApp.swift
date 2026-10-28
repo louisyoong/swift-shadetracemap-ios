@@ -1,4 +1,5 @@
 import SwiftUI
+import UserNotifications
 
 @main
 struct ShadeTraceMapApp: App {
@@ -11,6 +12,7 @@ struct ShadeTraceMapApp: App {
 
     init() {
         LegacyFlutterSettings.migrate()
+        UNUserNotificationCenter.current().delegate = NotificationPresenter.shared
     }
 
     var body: some Scene {
@@ -29,6 +31,8 @@ struct ShadeTraceMapApp: App {
             .environment(\.locale, language.locale)
             .environment(\.layoutDirection, language.layoutDirection)
             .environment(language)
+            .environment(SavedPlaces.shared)
+            .environment(GoldenHourReminders.shared)
             // One hinge observer for the whole app; every screen reads the
             // posture from the environment.
             .background(HingeObserver(state: fold))
@@ -38,7 +42,14 @@ struct ShadeTraceMapApp: App {
         }
         .onChange(of: scenePhase) { _, phase in
             // Keeps the widget fresh across day boundaries / location changes.
-            if phase == .active { Task { await HomeWidgetSync.sync() } }
+            // Reminders are rescheduled too, so they follow the user's location
+            // and always cover the coming week.
+            if phase == .active {
+                Task {
+                    await HomeWidgetSync.sync()
+                    await GoldenHourReminders.shared.reschedule()
+                }
+            }
         }
     }
 }

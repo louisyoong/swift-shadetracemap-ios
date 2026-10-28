@@ -46,6 +46,7 @@ let kLightTextMuted = Color(hex: 0x992A2620)
 let kDarkText = Color(hex: 0xFFF3F1EC)
 let kDarkTextMuted = Color(hex: 0x99F3F1EC)
 let kBlue = Color(hex: 0xFF3B7CFF)
+let kGold = Color(hex: 0xFFFFB300)
 
 func textColor(_ isDark: Bool) -> Color { isDark ? kDarkText : kLightText }
 func textMuted(_ isDark: Bool) -> Color { isDark ? kDarkTextMuted : kLightTextMuted }
@@ -185,6 +186,8 @@ struct LocationChip: View {
     let label: String
     let textColor: Color
     let isDark: Bool
+    /// Adds a chevron when the chip opens a menu.
+    var showsMenu = false
 
     var body: some View {
         HStack(spacing: 5) {
@@ -196,6 +199,11 @@ struct LocationChip: View {
                 .foregroundStyle(textColor)
                 .lineLimit(1)
                 .truncationMode(.tail)
+            if showsMenu {
+                Image(systemName: "chevron.down")
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundStyle(textColor.opacity(0.6))
+            }
         }
         .padding(.leading, 10)
         .padding(.trailing, 14)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01D4A972DB6CCB7112A5DE7C /* GoldenHourReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E1420D28D0C290A40D7008 /* GoldenHourReminders.swift */; };
 		10C57C76C90B0E4C5B49B6EC /* LegacyFlutterSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF087E191EC7AAA942A5C659 /* LegacyFlutterSettings.swift */; };
 		117A19797A5EE8D87D5A7578 /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710120E765628238E27FB3E3 /* AppStyle.swift */; };
 		132839A52B523B10141D5008 /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17759ABC438D4B557EF9077A /* AppTabBar.swift */; };
@@ -22,6 +23,7 @@
 		6479B69349AFAEF0E234EA39 /* DeviceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAB710A4A6E586B92DF429D /* DeviceLocation.swift */; };
 		73F441E3E45665F2CF604760 /* CompassScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04462D697C3F83422869B843 /* CompassScreen.swift */; };
 		7991A7D7C6DBD13A0F6FA9DF /* ShadeTraceMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF55F3C97200C65F805807F /* ShadeTraceMapApp.swift */; };
+		810FEFB99CD65FCA0BB706FE /* SavedPlacesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9DAC5CFEFC39242D16D88B /* SavedPlacesPage.swift */; };
 		841A46D668C6F3C73FF843DD /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA04D69B6D7D153E02C292C /* SettingsScreen.swift */; };
 		A1070673738E2ADB042DCD25 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AAAD16D831C8821CD7AA012F /* PrivacyInfo.xcprivacy */; };
 		A3A62855E5946FBC878B1C16 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFED4299482909BE3AD3E0 /* AppLanguage.swift */; };
@@ -32,6 +34,7 @@
 		C24277E3154C6F04B709C8D5 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 0F49089D3B7418E686165BAF /* Localizable.xcstrings */; };
 		CE2A0F36768363636E8A5F96 /* ShadeMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B73878E544F4981E6087DB /* ShadeMapModel.swift */; };
 		E26DC3D13192812DA4E64175 /* SunPathScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21300FA212FF065F750536E8 /* SunPathScreen.swift */; };
+		E2CCA5188B95714BF7B1F61D /* SavedPlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7421A66E8707C4229A45642F /* SavedPlaces.swift */; };
 		E7BFD959C04D9EC1DC040C64 /* SunsetWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CB831C1592B6B2855CA6C6F4 /* SunsetWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E7CDDAC077580B873621A778 /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE4EEB847E1CB6BB76A054 /* OnboardingScreen.swift */; };
 		E97556580185990B709EE95D /* SunMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D037F216666B5D56F44DC739 /* SunMath.swift */; };
@@ -73,9 +76,10 @@
 		2013D1D5E717D692BCC86CA8 /* WeatherScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherScreen.swift; sourceTree = "<group>"; };
 		21300FA212FF065F750536E8 /* SunPathScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPathScreen.swift; sourceTree = "<group>"; };
 		2278D263FC0E6291B1AF404D /* LocationSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearch.swift; sourceTree = "<group>"; };
+		2C9DAC5CFEFC39242D16D88B /* SavedPlacesPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPlacesPage.swift; sourceTree = "<group>"; };
 		3F39AF1483BF44F398898F57 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		417203AE1A15C83B7C697258 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4BDB39A4400C174A542848F6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		4BDB39A4400C174A542848F6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		4F564E40E262F10A85619883 /* AppRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRating.swift; sourceTree = "<group>"; };
 		51B73878E544F4981E6087DB /* ShadeMapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadeMapModel.swift; sourceTree = "<group>"; };
 		5755E8A4565EDC96B424CCC7 /* ShadeMapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadeMapScreen.swift; sourceTree = "<group>"; };
@@ -84,10 +88,12 @@
 		6DA04D69B6D7D153E02C292C /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		710120E765628238E27FB3E3 /* AppStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
 		734FC1FF213291FF0865913D /* LocationSearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchField.swift; sourceTree = "<group>"; };
+		7421A66E8707C4229A45642F /* SavedPlaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPlaces.swift; sourceTree = "<group>"; };
 		7EC688ED0B7C05DB733C843B /* ShadeTraceMap.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ShadeTraceMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		893EA88468E1EDEEDD8E3F7B /* ShadeTraceMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShadeTraceMap.entitlements; sourceTree = "<group>"; };
+		93E1420D28D0C290A40D7008 /* GoldenHourReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldenHourReminders.swift; sourceTree = "<group>"; };
 		9A81CF58A5FE80E343D7387F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		AAAD16D831C8821CD7AA012F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		AAAD16D831C8821CD7AA012F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		BF087E191EC7AAA942A5C659 /* LegacyFlutterSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyFlutterSettings.swift; sourceTree = "<group>"; };
 		CB831C1592B6B2855CA6C6F4 /* SunsetWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = SunsetWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCFE4EEB847E1CB6BB76A054 /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
@@ -138,6 +144,7 @@
 				710120E765628238E27FB3E3 /* AppStyle.swift */,
 				17759ABC438D4B557EF9077A /* AppTabBar.swift */,
 				734FC1FF213291FF0865913D /* LocationSearchField.swift */,
+				2C9DAC5CFEFC39242D16D88B /* SavedPlacesPage.swift */,
 				EFEA0B46EB01F517A9702409 /* TimeSlider.swift */,
 			);
 			path = UI;
@@ -193,9 +200,11 @@
 				CEEFED4299482909BE3AD3E0 /* AppLanguage.swift */,
 				4F564E40E262F10A85619883 /* AppRating.swift */,
 				FDAB710A4A6E586B92DF429D /* DeviceLocation.swift */,
+				93E1420D28D0C290A40D7008 /* GoldenHourReminders.swift */,
 				F64E27F98ACB6FF0FEFE427E /* HomeWidgetSync.swift */,
 				BF087E191EC7AAA942A5C659 /* LegacyFlutterSettings.swift */,
 				2278D263FC0E6291B1AF404D /* LocationSearch.swift */,
+				7421A66E8707C4229A45642F /* SavedPlaces.swift */,
 				D037F216666B5D56F44DC739 /* SunMath.swift */,
 				3F39AF1483BF44F398898F57 /* WeatherAPI.swift */,
 			);
@@ -388,12 +397,15 @@
 				73F441E3E45665F2CF604760 /* CompassScreen.swift in Sources */,
 				6479B69349AFAEF0E234EA39 /* DeviceLocation.swift in Sources */,
 				341DEF7A972988F820E555F9 /* Foldable.swift in Sources */,
+				01D4A972DB6CCB7112A5DE7C /* GoldenHourReminders.swift in Sources */,
 				19FAA178E4D48565F0FC74A2 /* HomeWidgetSync.swift in Sources */,
 				10C57C76C90B0E4C5B49B6EC /* LegacyFlutterSettings.swift in Sources */,
 				1D4A5143D8F874188613FA8D /* LocationSearch.swift in Sources */,
 				AF694D6690793338EDA96883 /* LocationSearchField.swift in Sources */,
 				E7CDDAC077580B873621A778 /* OnboardingScreen.swift in Sources */,
 				58A74591D016FA304410807B /* RootView.swift in Sources */,
+				E2CCA5188B95714BF7B1F61D /* SavedPlaces.swift in Sources */,
+				810FEFB99CD65FCA0BB706FE /* SavedPlacesPage.swift in Sources */,
 				841A46D668C6F3C73FF843DD /* SettingsScreen.swift in Sources */,
 				CE2A0F36768363636E8A5F96 /* ShadeMapModel.swift in Sources */,
 				A4AA547F76CAAF42C6690E80 /* ShadeMapScreen.swift in Sources */,
@@ -469,7 +481,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = M9VG7M352C;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -489,7 +501,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -536,7 +548,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = M9VG7M352C;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -550,7 +562,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
