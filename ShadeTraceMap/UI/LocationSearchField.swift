@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Place search with saved places: the star saves `current` and opens the
+/// Place search with saved places: the pin saves `current` and opens the
 /// Saved Places page, and focusing the field lists them to jump to.
 struct LocationSearchField: View {
     @Environment(\.colorScheme) private var scheme
@@ -66,7 +66,7 @@ struct LocationSearchField: View {
                 )
 
                 if let current {
-                    starButton(current, tint: tint, muted: muted)
+                    saveButton(current, tint: tint, muted: muted)
                 }
             }
 
@@ -106,20 +106,21 @@ struct LocationSearchField: View {
         }
     }
 
-    /// Its own square beside the field, same height and glass.
-    private func starButton(_ current: Place, tint: Color, muted: Color) -> some View {
+    /// A round glass button beside the field with the pin, gold once saved.
+    private func saveButton(_ current: Place, tint: Color, muted: Color) -> some View {
         let isSaved = saved.saved(lat: current.lat, lon: current.lon) != nil
         return Button {
             focused = false
             // Already saved: just open the list (remove from there).
             savedPage = SavedPageItem(highlighted: isSaved ? nil : saved.save(current).id)
         } label: {
-            Image(systemName: isSaved ? "star.fill" : "star")
-                .font(.system(size: 16, weight: .semibold))
+            Image(systemName: "mappin.and.ellipse")
+                .font(.system(size: 17, weight: .semibold))
                 .foregroundStyle(isSaved ? kGold : muted)
                 .frame(width: 42, height: 42)
-                .glass(radius: 11, tint: tint, opacity: 0.75)
-                .contentShape(Rectangle())
+                .glass(circle: true, tint: tint, opacity: 0.75)
+                .overlay(Circle().stroke(kGold.opacity(isSaved ? 0.6 : 0), lineWidth: 1.2))
+                .contentShape(Circle())
         }
         .buttonStyle(.plain)
         .accessibilityLabel(isSaved ? Text("Saved Places") : Text("Save this place"))
@@ -141,7 +142,7 @@ struct LocationSearchField: View {
                             onSelect(place.place)
                         } label: {
                             HStack(spacing: 8) {
-                                Image(systemName: "star.fill").font(.system(size: 11)).foregroundStyle(kGold)
+                                Image(systemName: "mappin.and.ellipse").font(.system(size: 11)).foregroundStyle(kGold)
                                 Text(place.name)
                                     .font(.system(size: 12.5, weight: .medium))
                                     .foregroundStyle(text)

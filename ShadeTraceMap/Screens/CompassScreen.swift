@@ -170,7 +170,7 @@ struct CompassScreen: View {
                                 lng = place.lon
                                 locationLabel = place.name
                                 updateFacingEffects()
-                            } label: { Label(place.name, systemImage: "star.fill") }
+                            } label: { Label(place.name, systemImage: "mappin.and.ellipse") }
                         }
                     }
                 } label: { label }

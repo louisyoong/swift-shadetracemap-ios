@@ -9669,107 +9669,6 @@
         }
       }
     },
-    "Tap the ☆ in any search bar to save a place." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "اضغط على ☆ في أي شريط بحث لحفظ مكان."
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tryk på ☆ i et søgefelt for at gemme et sted."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tippe in einer Suchleiste auf ☆, um einen Ort zu speichern."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toca la ☆ en cualquier barra de búsqueda para guardar un lugar."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Touchez ☆ dans une barre de recherche pour enregistrer un lieu."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ketuk ☆ di kolom pencarian mana pun untuk menyimpan tempat."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "検索バーの☆をタップすると場所を保存できます。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "검색창의 ☆를 탭하면 장소를 저장할 수 있습니다."
-          }
-        },
-        "la" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tange ☆ in quavis capsa quaerendi ut locum serves."
-          }
-        },
-        "ms" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ketik ☆ dalam mana-mana bar carian untuk menyimpan tempat."
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toque na ☆ em qualquer barra de busca para salvar um local."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Нажмите ☆ в строке поиска, чтобы сохранить место."
-          }
-        },
-        "ss" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cindzetela ☆ kunoma ngumuphi umugca wekusesha kute ugcine indzawo."
-          }
-        },
-        "yue-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "喺任何搜尋欄撳 ☆ 就可以儲存地方。"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在任意搜索栏点 ☆ 即可保存地点。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在任何搜尋列點 ☆ 即可儲存地點。"
-          }
-        }
-      }
-    },
     "Morning golden hour" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -10372,6 +10271,107 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "還沒有已儲存的地點"
+          }
+        }
+      }
+    },
+    "Tap the pin next to any search bar to save a place." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اضغط على الدبوس بجانب أي شريط بحث لحفظ مكان."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tryk på nålen ved siden af et søgefelt for at gemme et sted."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tippe auf die Stecknadel neben einer Suchleiste, um einen Ort zu speichern."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca el pin junto a cualquier barra de búsqueda para guardar un lugar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Touchez l'épingle à côté d'une barre de recherche pour enregistrer un lieu."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ketuk pin di samping kolom pencarian mana pun untuk menyimpan tempat."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "検索バーの横にあるピンをタップすると場所を保存できます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "검색창 옆의 핀을 탭하면 장소를 저장할 수 있습니다."
+          }
+        },
+        "la" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tange acum iuxta quamvis capsam quaerendi ut locum serves."
+          }
+        },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ketik pin di sebelah mana-mana bar carian untuk menyimpan tempat."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toque no alfinete ao lado de qualquer barra de busca para salvar um local."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нажмите на булавку рядом со строкой поиска, чтобы сохранить место."
+          }
+        },
+        "ss" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cindzetela liphini eceleni kwanoma ngumuphi umugca wekusesha kute ugcine indzawo."
+          }
+        },
+        "yue-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "喺任何搜尋欄旁邊撳個圖釘就可以儲存地方。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "点按任意搜索栏旁的图钉即可保存地点。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "點一下任何搜尋列旁的圖釘即可儲存地點。"
           }
         }
       }

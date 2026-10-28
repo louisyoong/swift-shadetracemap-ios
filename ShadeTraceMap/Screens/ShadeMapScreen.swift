@@ -354,13 +354,10 @@ private struct BottomBar: View {
 
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(formatBigTime(model.minutes))
-                        .font(.system(size: 19, weight: .bold)).tracking(0.3)
-                        .foregroundStyle(onPanel)
-                        .monospacedDigit()
-                    Text(model.dateStr).font(.system(size: 12)).foregroundStyle(muted)
-                }
+                Text(formatBigTime(model.minutes))
+                    .font(.system(size: 19, weight: .bold)).tracking(0.3)
+                    .foregroundStyle(onPanel)
+                    .monospacedDigit()
                 Spacer()
                 PlayButton(playing: model.playing, action: model.togglePlaying)
             }

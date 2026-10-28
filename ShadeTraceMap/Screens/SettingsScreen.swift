@@ -11,6 +11,13 @@ struct SettingsScreen: View {
     @Environment(SavedPlaces.self) private var saved
     @Environment(GoldenHourReminders.self) private var reminders
     @Binding var themeMode: ThemeMode
+    /// Bottom safe area outside and inside the NavigationStack. The stack
+    /// drops the extra inset RootView adds for the floating tab bar, so
+    /// the difference is added back - otherwise the end of the page (and of
+    /// pushed pages) stays hidden behind the bar.
+    @State private var outerBottom: CGFloat = 0
+    @State private var innerBottom: CGFloat = 0
+    private var tabBarGap: CGFloat { max(0, outerBottom - innerBottom) }
 
     var body: some View {
         let isDark = scheme == .dark
@@ -18,75 +25,107 @@ struct SettingsScreen: View {
         let label = Color.secondary
         let divider = Rectangle().fill(Color.primary.opacity(0.08)).frame(height: 1)
 
-        GeometryReader { geo in
-            // Keeps the cards a readable width on wide windows.
-            let side = max(16, (geo.size.width - 640) / 2)
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("Settings")
-                        .font(.system(size: 28, weight: .bold)).tracking(-0.5)
-                    HStack(spacing: 14) {
-                        Image("Logo").resizable().frame(width: 52, height: 52)
-                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                        VStack(alignment: .leading, spacing: 3) {
-                            Text("Shade Map Demo").font(.system(size: 16, weight: .bold))
-                            Text("Real 3D buildings + computed sun-cast shadows, with a standalone sun-path simulator.")
-                                .font(.system(size: 12)).foregroundStyle(label).lineSpacing(3)
+        // A navigation stack so Saved Places can be pushed and come back with
+        // the back button; this page keeps its own large title, so the bar
+        // only shows on pushed pages.
+        NavigationStack {
+            GeometryReader { geo in
+                // Keeps the cards a readable width on wide windows.
+                let side = max(16, (geo.size.width - 640) / 2)
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("Settings")
+                            .font(.system(size: 28, weight: .bold)).tracking(-0.5)
+                        HStack(spacing: 14) {
+                            Image("Logo").resizable().frame(width: 52, height: 52)
+                                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text("Shade Map Demo").font(.system(size: 16, weight: .bold))
+                                Text("Real 3D buildings + computed sun-cast shadows, with a standalone sun-path simulator.")
+                                    .font(.system(size: 12)).foregroundStyle(label).lineSpacing(3)
+                            }
                         }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(16)
-                    .glass(radius: kCardRadius, tint: panelTint, opacity: 0.55)
-                    .padding(.top, 20)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(16)
+                        .glass(radius: kCardRadius, tint: panelTint, opacity: 0.55)
+                        .padding(.top, 20)
 
-                    SectionLabel("APPEARANCE", color: label).padding(.leading, 4).padding(.bottom, 8).padding(.top, 28)
-                    VStack(spacing: 0) {
-                        themeOption("circle.lefthalf.filled", "System", "Match your device setting", .system, isDark)
-                        divider
-                        themeOption("sun.max.fill", "Light", nil, .light, isDark)
-                        divider
-                        themeOption("moon.fill", "Dark", nil, .dark, isDark)
-                    }
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 4)
-                    .glass(radius: kCardRadius, tint: panelTint, opacity: 0.55)
-
-                    SectionLabel("LANGUAGE", color: label).padding(.leading, 4).padding(.bottom, 8).padding(.top, 28)
-                    languagePicker(isDark)
+                        SectionLabel("APPEARANCE", color: label).padding(.leading, 4).padding(.bottom, 8).padding(.top, 28)
+                        VStack(spacing: 0) {
+                            themeOption("circle.lefthalf.filled", "System", "Match your device setting", .system, isDark)
+                            divider
+                            themeOption("sun.max.fill", "Light", nil, .light, isDark)
+                            divider
+                            themeOption("moon.fill", "Dark", nil, .dark, isDark)
+                        }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 4)
                         .glass(radius: kCardRadius, tint: panelTint, opacity: 0.55)
 
-                    SectionLabel("GOLDEN HOUR REMINDERS", color: label).padding(.leading, 4).padding(.bottom, 8).padding(.top, 28)
-                    remindersCard(isDark, divider: divider)
-                        .glass(radius: kCardRadius, tint: panelTint, opacity: 0.55)
+                        SectionLabel("LANGUAGE", color: label).padding(.leading, 4).padding(.bottom, 8).padding(.top, 28)
+                        languagePicker(isDark)
+                            .glass(radius: kCardRadius, tint: panelTint, opacity: 0.55)
 
-                    SectionLabel("SAVED PLACES", color: label).padding(.leading, 4).padding(.bottom, 8).padding(.top, 28)
-                    savedPlacesCard(isDark, divider: divider)
-                        .glass(radius: kCardRadius, tint: panelTint, opacity: 0.55)
+                        SectionLabel("GOLDEN HOUR REMINDERS", color: label).padding(.leading, 4).padding(.bottom, 8).padding(.top, 28)
+                        remindersCard(isDark, divider: divider)
+                            .glass(radius: kCardRadius, tint: panelTint, opacity: 0.55)
 
-                    SectionLabel("ABOUT", color: label).padding(.leading, 4).padding(.bottom, 8).padding(.top, 28)
-                    VStack(spacing: 0) {
-                        infoRow("info.circle", "Version",
-                                Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "",
-                                isDark)
-                        divider
-                        infoRow("heart", "Made for sun-chasers", "☀️", isDark)
-                        divider
-                        Button { UIApplication.shared.open(linkedInURL) } label: {
-                            row("link", "Contact via LinkedIn", isDark) {
-                                Image(systemName: "chevron.right").font(.system(size: 13)).foregroundStyle(label)
+                        SectionLabel("SAVED PLACES", color: label).padding(.leading, 4).padding(.bottom, 8).padding(.top, 28)
+                        NavigationLink {
+                            SavedPlacesPage(inSheet: false)
+                            .safeAreaPadding(.bottom, tabBarGap)
+                        } label: {
+                            row("mappin.and.ellipse", "Saved Places", isDark) {
+                                HStack(spacing: 6) {
+                                    Text(verbatim: "\(saved.places.count)")
+                                        .font(.system(size: 14)).foregroundStyle(.secondary)
+                                    Image(systemName: "chevron.right").font(.system(size: 13)).foregroundStyle(label)
+                                }
                             }
                         }
                         .buttonStyle(.plain)
+                        .padding(.vertical, 4)
+                        .glass(radius: kCardRadius, tint: panelTint, opacity: 0.55)
+
+                        SectionLabel("ABOUT", color: label).padding(.leading, 4).padding(.bottom, 8).padding(.top, 28)
+                        VStack(spacing: 0) {
+                            infoRow("info.circle", "Version",
+                                    Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "",
+                                    isDark)
+                            divider
+                            infoRow("heart", "Made for sun-chasers", "☀️", isDark)
+                            divider
+                            Button { UIApplication.shared.open(linkedInURL) } label: {
+                                row("link", "Contact via LinkedIn", isDark) {
+                                    Image(systemName: "chevron.right").font(.system(size: 13)).foregroundStyle(label)
+                                }
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        .padding(.vertical, 4)
+                        .glass(radius: kCardRadius, tint: panelTint, opacity: 0.55)
                     }
-                    .padding(.vertical, 4)
-                    .glass(radius: kCardRadius, tint: panelTint, opacity: 0.55)
+                    .padding(EdgeInsets(top: 20, leading: side, bottom: 16, trailing: side))
                 }
-                .padding(EdgeInsets(top: 20, leading: side, bottom: 16, trailing: side))
+                .safeAreaPadding(.bottom, tabBarGap)
+                .onAppear { innerBottom = geo.safeAreaInsets.bottom }
+                .onChange(of: geo.safeAreaInsets.bottom) { _, inset in innerBottom = inset }
+            }
+            .background(LinearGradient(colors: isDark ? [Color(hex: 0xFF171922), Color(hex: 0xFF0A0B0E)]
+                                                      : [Color(hex: 0xFFEAF2FF), Color(hex: 0xFFF7F8FA)],
+                                       startPoint: .topLeading, endPoint: .bottomTrailing).ignoresSafeArea())
+            // Names the back button on pushed pages ("‹ Settings").
+            .navigationTitle(Text("Settings"))
+            .toolbar(.hidden, for: .navigationBar)
+        }
+        .tint(accentForTheme(accent, isDark))
+        .background {
+            GeometryReader { outer in
+                Color.clear
+                    .onAppear { outerBottom = outer.safeAreaInsets.bottom }
+                    .onChange(of: outer.safeAreaInsets.bottom) { _, inset in outerBottom = inset }
             }
         }
-        .background(LinearGradient(colors: isDark ? [Color(hex: 0xFF171922), Color(hex: 0xFF0A0B0E)]
-                                                  : [Color(hex: 0xFFEAF2FF), Color(hex: 0xFFF7F8FA)],
-                                   startPoint: .topLeading, endPoint: .bottomTrailing).ignoresSafeArea())
     }
 
     /// A dropdown of every supported language, each in its own name, plus
@@ -172,39 +211,6 @@ struct SettingsScreen: View {
             }
         }
         .padding(.vertical, 4)
-    }
-
-    @ViewBuilder
-    private func savedPlacesCard(_ isDark: Bool, divider: some View) -> some View {
-        if saved.places.isEmpty {
-            Text("Tap the ☆ in any search bar to save a place.")
-                .font(.system(size: 13))
-                .foregroundStyle(.secondary)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(16)
-        } else {
-            VStack(spacing: 0) {
-                ForEach(Array(saved.places.enumerated()), id: \.element.id) { index, place in
-                    if index > 0 { divider }
-                    HStack(spacing: 12) {
-                        badge("star.fill", isDark)
-                        Text(verbatim: place.name).font(.system(size: 14)).lineLimit(1)
-                        Spacer()
-                        Button { saved.remove(place) } label: {
-                            Image(systemName: "trash")
-                                .font(.system(size: 14))
-                                .foregroundStyle(.secondary)
-                                .frame(width: 32, height: 32)
-                                .contentShape(Rectangle())
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel(Text("Remove from saved places"))
-                    }
-                    .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 8))
-                }
-            }
-            .padding(.vertical, 4)
-        }
     }
 
     private func menuRow<Items: View>(_ icon: String, _ text: LocalizedStringKey, _ isDark: Bool, value: Text,
